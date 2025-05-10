@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telekocsi</title>
+    <link rel="stylesheet" href="telekocsi.css" />
+  </head>
+  <body>
+    <div class="tartalom">
+      <div id="menu">
+        <ul>
+          <li><a href="telekocsi.html">Bemutatkozas</a></li>
+          <li><a href="telekocsi.html">Sofőröknek</a></li>
+          <li><a href="telekocsi.html">Utasoknak</a></li>
+          <li><a href="telekocsi.html">Bejelentkezés</a></li>
+          <li><a href="regisztracio.html">Regisztráció</a></li>
+        </ul>
+        <h2>Regisztráció</h2>
+        <form>
+          <div>
+            <label for="name">Név:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">E-mail cím:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div>
+            <label for="password">Jelszó:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div>
+            <label for="password2">Jelszó ismét:</label>
+            <input type="password" id="password2" name="password2" required />
+          </div>
+          <input type="submit" value="Mentés" />
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Regisztrációs űrlap ellenőrzése
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Megakadályozza az űrlap elküldését
+        console.log("Regisztrációs űrlap elküldve!");
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const password2 = document.getElementById("password2").value;
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordPattern =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        if (name === "") {
+          alert("Kérjük, adja meg a nevét!");
+          return;
+        } else if (name.length < 3) {
+          alert("A név legalább 3 karakter hosszú legyen!");
+          return;
+        }
+        if (email === "") {
+          alert("Kérjük, adja meg az e-mail címét!");
+          return;
+        } else if (!emailPattern.test(email)) {
+          alert("Kérjük, adjon meg egy érvényes e-mail címet!");
+          return;
+        }
+        if (password === "") {
+          alert("Kérjük, adja meg a jelszavát!");
+          return;
+        } else if (password.length < 8) {
+          alert("A jelszónak legalább 8 karakter hosszúnak kell lennie!");
+          return;
+        } else if (!passwordPattern.test(password)) {
+          alert(
+            "A jelszónak legalább egy kisbetűt, egy nagybetűt és egy számot kell tartalmaznia!"
+          );
+          return;
+        }
+        if (password !== password2) {
+          alert("A jelszavak nem egyeznek meg!");
+          return;
+        }
+
+        // Itt lehetne a regisztrációs adatokat elküldeni a szerverre
+        alert(`Regisztráció sikeres! Üdvözöljük, ${name}!`);
+      });
+    </script>
+  </body>
+</html>
